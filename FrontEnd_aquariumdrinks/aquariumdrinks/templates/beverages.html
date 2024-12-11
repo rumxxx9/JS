@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block head %}
+
+
+<!-- display the items to the user -->
+<section>
+  <div class="text-dark text-center">
+    <div>
+      <p class="h3 text-light mb-4">Pick Your Taste Vacation!</p>
+    </div>
+  </div>
+  <div class="container col-md-6">
+    <div class="row">
+      <div class="col">
+        <div class="card-deck">
+
+          {% for beverage in beverages%}
+          <div class="card-deck">
+            <img class="card-img-top " style="width:200px; height:200px;"
+              src="{{url_for('static', filename='img/'+beverage.image)}}" alt="Card image">
+            <div class="card-body" style="width:300px; height:250px">
+              <h4 class="card-title">{{beverage.name}}</h4>
+              <p class="card-text">{{beverage.description}}</p>
+              <p class="card-text">${{beverage.price}}</p>
+            </div>
+            <div class="card-footer">
+              <form action="{{ url_for('main.order') }}">
+                <input type="hidden" id="beverage_id" name="beverage_id" value="{{beverage.id}}">
+                <input class="btn btn-warning" type="submit" value="Add to basket">
+              </form>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block main%}{% endblock %}
